@@ -21,7 +21,7 @@
           <td>{{ item.element }}</td>
           <td>
             <DeleteElementButton
-              @delete-element-event="$emit('delete-item', item)"
+              @click="deleteElement(item)"
             >
               x
             </DeleteElementButton>
@@ -35,6 +35,7 @@
 
 <script>
 import DeleteElementButton from "../button/DeleteElementButton.vue";
+import { mapState , mapMutations  } from "vuex";
 
 export default {
   data() {
@@ -42,7 +43,7 @@ export default {
       isGreen: false,
     };
   },
-  props: ["list"],
+
   components: {
     DeleteElementButton,
   },
@@ -60,8 +61,16 @@ export default {
 
       // }
      
-    },
+    }, 
+     ...mapMutations([
+        'deleteElement' 
+     ])
   },
+  computed: {
+     ...mapState([
+      'list'
+  ])
+  }
 };
 </script>
 
